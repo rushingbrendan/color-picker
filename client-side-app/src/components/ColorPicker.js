@@ -25,6 +25,8 @@ class ColorPicker extends Component {
       super();
 
       this.state = { 
+          favoriteColors: [],
+          colorHexCode: 0,
           red: 0,
           green: 0,
           blue: 0,
@@ -57,6 +59,20 @@ class ColorPicker extends Component {
         
         return true;
     }
+
+    addColor(event) {
+
+        // Create 
+
+        // Populate html object for color card.
+        this.state.favoriteColors.push()
+        // this.setState({
+        //   red: event.target.value
+        // });
+        
+        return true;
+    }
+
 
 
     /* 
@@ -104,6 +120,48 @@ class ColorPicker extends Component {
     return true;
 }
 
+    componentToHex(c) {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+  
+    rgbToHex(r, g, b) {        
+
+        return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
+  }
+  
+  //alert(rgbToHex(0, 51, 255)); // #0033ff
+
+    rgb2hex(red, green, blue) {
+        var rgb = blue | (green << 8) | (red << 16);
+
+        var returnString = '#' + (0x1000000 + rgb).toString(16).slice(1);        
+
+        return '#' + (0x1000000 + rgb).toString(16).slice(1);
+    }    
+
+    renderColorHexCode(){
+
+        var hexColorCode = this.rgb2hex(this.state.red, this.state.green, this.state.blue);
+
+        return (<div><h1>{hexColorCode}</h1></div>)
+    }
+
+    renderFavoriteColors(){
+
+
+        return (<div></div>
+
+        
+        // <div>
+        //     {currentFavoriteColor}
+        //     </div>                                                        
+
+
+        // </div>
+        )
+    }
+
 
     DisplayColors(){
 
@@ -140,6 +198,12 @@ class ColorPicker extends Component {
     render() {
       return (        
         <div>
+            <br></br>
+            <div className="container">
+                <h1>Create Color</h1>
+             </div>
+            
+            <hr></hr>
             <br></br>               
                <div className="container">
                   <table>
@@ -278,17 +342,19 @@ class ColorPicker extends Component {
 
                <div className="container">
                 <div className="form-row">
-                    <div className="col-2">
-<h1>FFE710</h1>
-                    </div>
-                    <div className="col-6">
-                    
-                    <button type="button" class="btn btn-success"> Copy Color </button>
 
-                        </div>
+                    <div className="col-2">
+                        <div>{this.renderColorHexCode()}</div>
+                    </div>
+
+                    <div className="col-6">                    
+                        <button type="button" class="btn btn-success"
+                            onClick={event => this.addColor(event)}> Copy Color </button>        
+                    </div>
                     <h3></h3>
                 </div>
-               </div>
+               </div>               
+               <br></br>
                <div className="container">
   
   <div className="card">
@@ -297,6 +363,7 @@ class ColorPicker extends Component {
         <br></br>
         <br></br>
         <br></br>
+        <div>{this.renderFavoriteColors()}</div>}
         <br></br>
         <br></br>
         <br></br>
