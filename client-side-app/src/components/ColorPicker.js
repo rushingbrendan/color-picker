@@ -60,17 +60,29 @@ class ColorPicker extends Component {
         return true;
     }
 
-    addColor(event) {
+    // addColor(event) {
 
-        // Create 
+    //     // Create 
 
-        // Populate html object for color card.
-        this.state.favoriteColors.push()
-        // this.setState({
-        //   red: event.target.value
-        // });
+    //     // Populate html object for color card.
+    //     this.state.favoriteColors.push()
+    //     // this.setState({
+    //     //   red: event.target.value
+    //     // });
         
-        return true;
+    //     return true;
+    // }
+
+
+    addFavourite() {  
+         
+        var hexColorCode = this.rgb2hex(this.state.red, this.state.green, this.state.blue);
+
+        //Check if selected item is already in array
+        if (!this.state.favoriteColors.includes(hexColorCode)){
+            //add item to array            
+            this.state.favoriteColors.push(hexColorCode);   
+        }
     }
 
 
@@ -122,7 +134,7 @@ class ColorPicker extends Component {
 
     componentToHex(c) {
         var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
+        return hex.length === 1 ? "0" + hex : hex;
     }
   
     rgbToHex(r, g, b) {        
@@ -136,8 +148,10 @@ class ColorPicker extends Component {
         var rgb = blue | (green << 8) | (red << 16);
 
         var returnString = '#' + (0x1000000 + rgb).toString(16).slice(1);        
+        returnString = returnString.toUpperCase();
 
-        return '#' + (0x1000000 + rgb).toString(16).slice(1);
+        //return '#' + (0x1000000 + rgb).toString(16).slice(1);
+        return returnString;
     }    
 
     renderColorHexCode(){
@@ -150,50 +164,36 @@ class ColorPicker extends Component {
     renderFavoriteColors(){
 
 
-        return (<div></div>
+        return (<div className="container">
+            <div className="row">
 
-        
-        // <div>
-        //     {currentFavoriteColor}
-        //     </div>                                                        
+            {this.state.favoriteColors.map(currentColor=>    
+            <div className="shadow-sm p-3 mb-5 bg-white rounded col-4" style={{ backgroundColor: `white`, borderColor: `black`, borderWidth: `5px` }}>
+                <div className="alert alert-dismissible fade show" role="alert" >
+                    <h5>{currentColor}</h5>
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+                <hr></hr>
+                
+                        <div className="" style={{ backgroundColor: `${currentColor}` }}>
+                        <br></br>
+                        <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                        </div>
+                    
 
-
-        // </div>
-        )
+                </div>
+            </div>
+            )}
+        </div>
+        </div>)
     }
 
 
-    DisplayColors(){
-
-        let colorBoxes= []
-
-        // Loop through all colors.
-        for (let i = 0; i < 10000; i++) {
-
-            i = i + 10;
-
-            // Convert integer value to hex.
-            var hexCode = i.toString(16);            
-            var currentColor = '#';
-
-            // Check if color hexcode is smaller than 6 and needs to be filled with 0's.
-            if (hexCode.length < 6){
-
-                for (var y=0; y < 6 - hexCode.length; y++){
-                    currentColor += '0';
-                }
-                currentColor += hexCode;
-                currentColor = currentColor.toUpperCase();
-            }          
-
-          colorBoxes.push(<div key={i} className="colorBox" style={{backgroundColor: `${currentColor}`}}></div>)
-          
-        }
-        return(
-            <div className="colorBoxContainer">{colorBoxes}</div>
-        )
-    }
-    
 
     render() {
       return (        
@@ -349,31 +349,32 @@ class ColorPicker extends Component {
 
                     <div className="col-6">                    
                         <button type="button" class="btn btn-success"
-                            onClick={event => this.addColor(event)}> Copy Color </button>        
-                    </div>
-                    <h3></h3>
+                            onClick={event => this.addFavourite(event)}> Copy Color </button>        
+                    </div>                    
                 </div>
                </div>               
                <br></br>
                <div className="container">
   
-  <div className="card">
-    <div className="card-body" 
+  
+    <div className="container" 
     style={{ backgroundColor: `rgb(${this.state.red},${this.state.green},${this.state.blue})` }}>
         <br></br>
         <br></br>
         <br></br>
-        <div>{this.renderFavoriteColors()}</div>}
+        
         <br></br>
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
+        <br></br>        
   
         <br></br>
-        <br></br></div>
+        <br></br>
   </div>
 </div>
+<br></br>
+<div>{this.renderFavoriteColors()}</div>
 <br></br>
          </div>
       );
