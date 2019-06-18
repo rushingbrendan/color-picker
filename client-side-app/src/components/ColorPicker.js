@@ -12,6 +12,8 @@ import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 import { faEyeDropper} from '@fortawesome/free-solid-svg-icons';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faRandom } from '@fortawesome/free-solid-svg-icons';
+import {faCopy } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -19,6 +21,8 @@ library.add(faStroopwafel);
 library.add(faEyeDropper);
 library.add(faPlusCircle);
 library.add(faMinusCircle);
+library.add(faRandom);
+library.add(faCopy);
 
 
 class ColorPicker extends Component {
@@ -36,8 +40,38 @@ class ColorPicker extends Component {
         };
 
     }
+
+    //Set Red Color
+    setRed(inputRed){        
+
+        // Set the redcolor state.
+        this.setState({
+            red: inputRed
+        });
+    }
+
+    // Set Green Color.
+    setGreen(inputGreen){
+        
+        // Set the green color state.
+        this.setState({
+            green: inputGreen
+        });
+    }
+
+    // Set Blue Color.
+    setBlue(inputBlue){
+    
+        // Set the blue color state.
+        this.setState({
+            blue: inputBlue
+        });
+    }
+
+    // Update Red Color State.
     updateRed(event) {
 
+        // Set the red color state.
         this.setState({
           red: event.target.value
         });
@@ -45,8 +79,10 @@ class ColorPicker extends Component {
         return true;
     }
 
+    // Update Green Color State.
     updateGreen(event) {
 
+        // Set the green color state.
         this.setState({
           green: event.target.value
         });
@@ -54,6 +90,7 @@ class ColorPicker extends Component {
         return true;
     }
 
+    // Update Blue Color State.
     updateBlue(event) {
 
         this.setState({
@@ -63,21 +100,8 @@ class ColorPicker extends Component {
         return true;
     }
 
-    // addColor(event) {
-
-    //     // Create 
-
-    //     // Populate html object for color card.
-    //     this.state.favoriteColors.push()
-    //     // this.setState({
-    //     //   red: event.target.value
-    //     // });
-        
-    //     return true;
-    // }
-
-
-    addFavourite() {  
+    // Add favorite
+    addFavorite() {  
          
         var hexColorCode = this.rgb2hex(this.state.red, this.state.green, this.state.blue);
 
@@ -159,13 +183,94 @@ class ColorPicker extends Component {
 
         var hexColorCode = this.rgb2hex(this.state.red, this.state.green, this.state.blue);
 
-        return (<div><h1>{hexColorCode}</h1></div>)
+        return (<div><h3>{hexColorCode}</h3></div>)
     }
+
+    // Randomize the current color
+    randomizeColors(){
+
+    // Get random numbers.
+    var red = this.randomizeColor(this.state.red);
+    var green = this.randomizeColor(this.state.green);
+    var blue = this.randomizeColor(this.state.blue);
+
+    // Assign random numbers to state.
+    this.setRed(red);
+    this.setGreen(green);
+    this.setBlue(blue);
+        
+    }
+
+    randomizeColor(inputColor){
+
+        if ((inputColor < 257) && (inputColor > -1)){
+            //valid number
+            //alert(inputColor);
+
+            // Create a random number between 0 and 256.
+            var randomNum = Math.floor(Math.random() * 256);
+
+
+            //alert (randomNum);
+            // Return random color rgb value
+            return randomNum;
+        }
+    }
+
+
+
+    removeA(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
+
+
 
     removeColorCard(color){
 
-        alert(color);
+        //alert(color);
 
+
+        if (this.state.favoriteColors.indexOf(color) > -1) {
+            //alert('in the array');
+            //In the array!
+
+//            var ary = ['three', 'seven', 'eleven'];
+
+//alert(this.state.favoriteColors);
+//alert(color);
+            this.state.favoriteColors = this.removeA(this.state.favoriteColors, color);
+
+            //alert(this.state.favoriteColors);
+                //remove item from array
+                this.state.favoriteColors.splice(i, 1);
+
+
+        } else {
+            //Not in the array
+        }
+
+
+        //Check if selected item is already in array
+        if (this.state.favoriteColors.includes(color)){
+
+            //Item is found in array
+            var i = this.state.favoriteColors.indexOf(color);
+            alert(i);
+            if(i !== -1) {
+
+                //remove item from array
+                this.state.favoriteColors.splice(i, 1);
+            }  
+        
+
+        }
     }
 
     renderFavoriteColors(){
@@ -323,15 +428,27 @@ class ColorPicker extends Component {
 
                <div className="container">
                 <div className="form-row">
-
-                    <div className="col-2">
+                    <div className="col-3">
                         <div>{this.renderColorHexCode()}</div>
                     </div>
-
-                    <div className="col-6">                    
-                        <button type="button" class="btn btn-success"
-                            onClick={event => this.addFavourite(event)}> Create Color Card </button>        
-                    </div>                    
+                    <div className="col-3">
+                        <h3>{`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}</h3>
+                    </div>
+                </div>
+                <hr></hr>
+                <div className="form-row">
+                
+                <div className="col-4">                    
+                        <button type="button" class="btn btn-success"                        
+                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Copy Color </h3></button>        
+                    </div>            
+                    <div className="col-2">                    
+                        <button type="button" class="btn btn-dark"                        
+                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random Colors </h3></button>        
+                    </div>         
+                    <div className="col-2">                    
+                        
+                    </div>          
                 </div>
                </div>               
                <br></br>
@@ -348,7 +465,26 @@ class ColorPicker extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>        
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+
+
+
+    
   
         <br></br>
         <br></br>
