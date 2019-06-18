@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ColorCard from '../components/ColorCard.js';
 
 import '../css/bootstrap.min.css';
 import '../css/HeaderBar.css';
@@ -23,6 +24,8 @@ library.add(faMinusCircle);
 class ColorPicker extends Component {
     constructor(){
       super();
+      this.removeColorCard = this.removeColorCard.bind(this);
+
 
       this.state = { 
           favoriteColors: [],
@@ -142,15 +145,13 @@ class ColorPicker extends Component {
         return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
   }
   
-  //alert(rgbToHex(0, 51, 255)); // #0033ff
 
     rgb2hex(red, green, blue) {
         var rgb = blue | (green << 8) | (red << 16);
 
         var returnString = '#' + (0x1000000 + rgb).toString(16).slice(1);        
         returnString = returnString.toUpperCase();
-
-        //return '#' + (0x1000000 + rgb).toString(16).slice(1);
+        
         return returnString;
     }    
 
@@ -161,33 +162,21 @@ class ColorPicker extends Component {
         return (<div><h1>{hexColorCode}</h1></div>)
     }
 
+    removeColorCard(color){
+
+        alert(color);
+
+    }
+
     renderFavoriteColors(){
 
 
         return (<div className="container">
-            <div className="row">
+            <div className="row p-5">
 
-            {this.state.favoriteColors.map(currentColor=>    
-            <div className="shadow-sm p-3 mb-5 bg-white rounded col-4" style={{ backgroundColor: `white`, borderColor: `black`, borderWidth: `5px` }}>
-                <div className="alert alert-dismissible fade show" role="alert" >
-                    <h5>{currentColor}</h5>
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                </button>
-                <hr></hr>
-                
-                        <div className="" style={{ backgroundColor: `${currentColor}` }}>
-                        <br></br>
-                        <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                        </div>
-                    
-
-                </div>
-            </div>
+            {this.state.favoriteColors.map(currentColor=>   
+            
+                <ColorCard cardColor={currentColor} onClick={() => this.removeColorCard(currentColor)}></ColorCard>
             )}
         </div>
         </div>)
@@ -198,13 +187,13 @@ class ColorPicker extends Component {
     render() {
       return (        
         <div>
-            <br></br>
+            
             <div className="container">
                 <h1>Create Color</h1>
              </div>
             
             <hr></hr>
-            <br></br>               
+            
                <div className="container">
                   <table>
                     <tbody>
@@ -317,12 +306,6 @@ class ColorPicker extends Component {
                             </input>
 
                         </th>
-                        <th>
-                        {/* <FontAwesomeIcon icon="minus-circle" size="2x" color="#ff0000"/> */}
-                        </th>
-                        <th>
-                        {/* <FontAwesomeIcon icon="plus-circle" size="2x" color="#13bf41"/> */}
-                        </th>
                         <th><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></th>
                         <th style={{width: '600px',
                                     alignItems: 'right' }}>                        
@@ -336,8 +319,6 @@ class ColorPicker extends Component {
                 </tbody>
             </table>                
                </div>
-
-               {/* <br></br> */}
                <hr></hr>
 
                <div className="container">
@@ -349,7 +330,7 @@ class ColorPicker extends Component {
 
                     <div className="col-6">                    
                         <button type="button" class="btn btn-success"
-                            onClick={event => this.addFavourite(event)}> Copy Color </button>        
+                            onClick={event => this.addFavourite(event)}> Create Color Card </button>        
                     </div>                    
                 </div>
                </div>               
