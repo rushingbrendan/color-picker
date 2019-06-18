@@ -440,15 +440,12 @@ class ColorPicker extends Component {
                 
                 <div className="col-4">                    
                         <button type="button" class="btn btn-success"                        
-                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Copy Color </h3></button>        
+                            onClick={event => this.addFavorite(event)}> <h3 class><FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Copy Color </h3></button>        
                     </div>            
                     <div className="col-2">                    
                         <button type="button" class="btn btn-dark"                        
-                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random Colors </h3></button>        
+                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random</h3></button>        
                     </div>         
-                    <div className="col-2">                    
-                        
-                    </div>          
                 </div>
                </div>               
                <br></br>
