@@ -283,7 +283,8 @@ class ColorPicker extends Component {
         <div>
             
             <div className="container">
-                <h1>Create Color</h1>
+                <br></br>
+                <h2>Create Color</h2>
              </div>
             
             <hr></hr>
@@ -421,7 +422,7 @@ class ColorPicker extends Component {
                 <hr></hr>
                 <div className="form-row">
                 
-                <div className="col-4">                    
+                <div className="col-3">                    
                         <button type="button" className="btn btn-success"                        
                             onClick={event => this.addFavorite(event)}> <h3 class><FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Copy Color </h3></button>        
                     </div>            
@@ -430,11 +431,8 @@ class ColorPicker extends Component {
                             onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random</h3></button>        
                     </div>         
                 </div>
-               </div>               
-               <br></br>
-               <div className="container">
-  
-  
+               </div>         
+<br></br>
     <div className="container" 
     style={{ backgroundColor: `rgb(${this.state.red},${this.state.green},${this.state.blue})` }}>
         <br></br>
@@ -455,7 +453,6 @@ class ColorPicker extends Component {
   
         <br></br>
         <br></br>
-  </div>
 </div>
 <br></br>
 <div>{this.renderFavoriteColors()}</div>
