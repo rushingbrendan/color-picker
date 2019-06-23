@@ -280,18 +280,9 @@ class ColorPicker extends Component {
 
     render() {
       return (        
-        <div>
-            
-            <div className="container">
-                <br></br>
-                <h2>Create Color</h2>
-             </div>
-
-             <div className="row">
-                 <div className="col-2"></div>
-             </div>
-            
-            <hr></hr>
+        <div style={{backgroundColor: '#FFFFFF'}}>
+<br></br>
+        
             
                <div className="container">
                   <table>
@@ -424,11 +415,11 @@ class ColorPicker extends Component {
                     </div>
                     <div className="col-3">                    
                         <button type="button" className="btn btn-success"                        
-                            onClick={event => this.addFavorite(event)}> <h3 class><FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Copy Color </h3></button>        
+                            onClick={event => this.addFavorite(event)}> <FontAwesomeIcon icon="copy" size="1x" color="white"></FontAwesomeIcon> Create Color Card</button>        
                     </div>            
                     <div className="col-2">                    
                         <button type="button" className="btn btn-dark"                        
-                            onClick={event => this.randomizeColors(event)}> <h3 class><FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random</h3></button>        
+                            onClick={event => this.randomizeColors(event)}> <FontAwesomeIcon icon="random" size="1x" color="#ffe710"></FontAwesomeIcon> Random Colors</button>        
                     </div>  
                 </div>
                 <hr></hr>
@@ -450,17 +441,12 @@ class ColorPicker extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-  
+   
         <br></br>
         <br></br>
         </div>
 </div>
-<br></br>
 <div>{this.renderFavoriteColors()}</div>
-<br></br>
          </div>
       );
     }
